@@ -22,6 +22,8 @@ public class OurPlayer implements battleship.interfaces.BattleshipsPlayer
     private int sizeY;
     private int nextX;
     private int nextY;
+    private int corX = 0;
+    private int corY = 0;
     
     @Override
     public void startMatch(int rounds)
@@ -72,7 +74,14 @@ public class OurPlayer implements battleship.interfaces.BattleshipsPlayer
     @Override
     public Position getFireCoordinates(Fleet enemyShips)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Position shot = new Position(corX, corY);
+        
+        if (corX == 0 && corY == 0)
+        {
+            return shot;
+        }
+
+        return shot;
     }
 
     @Override
