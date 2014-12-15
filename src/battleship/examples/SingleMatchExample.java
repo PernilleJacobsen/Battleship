@@ -8,6 +8,7 @@ package battleship.examples;
 
 import battleship.interfaces.BattleshipsPlayer;
 import battleship.implementations.Battleships;
+import ourPlayer.OurPlayer;
 import tournament.game.GameInstance;
 import tournament.game.GameResult;
 
@@ -19,7 +20,7 @@ public class SingleMatchExample
 {
     public static void main(String[] args)
     {
-        BattleshipsPlayer player1 = new RandomPlayer();
+        BattleshipsPlayer player1 = new OurPlayer();
         BattleshipsPlayer player2 = new SystematicShotPlayer();
         GameInstance<BattleshipsPlayer> game = Battleships.getSingleGameInstance();
         GameResult res = game.run(player1, player2);
