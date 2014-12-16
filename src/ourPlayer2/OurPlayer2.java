@@ -16,7 +16,7 @@ import java.util.Random;
  *
  * @author Jeanette
  */
-public class OurPlayer1 implements battleship.interfaces.BattleshipsPlayer
+public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
 {
 
     private final static Random rnd = new Random();
@@ -26,6 +26,8 @@ public class OurPlayer1 implements battleship.interfaces.BattleshipsPlayer
     private int nextY;
     private int corX = 0;
     private int corY = 0;
+    private int th = 0;
+    private int ing = 0;
     ArrayList<Position> coordinates = new ArrayList<>();
     private boolean hit = false;
     private Position shoot;
@@ -79,9 +81,35 @@ public class OurPlayer1 implements battleship.interfaces.BattleshipsPlayer
     @Override
     public Position getFireCoordinates(Fleet enemyShips)
     {
-        
+        Position shot = new Position(corX, corY);
 
+        if (th > 0 && ing > 0)
+        {
+            if (corY >= sizeY)
+            // her lægger vi en til x for at skifte række
+            {
+                corX++;
+                corY++;
+                if (corY >= 2)
+                {
+                    corY = 0;
+                }
+            }
+            corY = corY + 2;
+            shot = new Position(corX, corY);
+            coordinates.add(shot);
+            return shot;
+        }
+        th = th + 1;
+        ing = ing + 1;
+        return shot;
     }
+    public ArrayList<Position> getCoordinates()
+    {
+        System.out.println(coordinates.toString());
+        return coordinates; 
+    }
+    
 
     @Override
     public void hitFeedBack(boolean hit, Fleet enemyShips)

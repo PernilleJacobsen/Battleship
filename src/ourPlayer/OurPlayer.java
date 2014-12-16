@@ -16,7 +16,7 @@ import java.util.Random;
  *
  * @author Jeanette
  */
-public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
+public class OurPlayer implements battleship.interfaces.BattleshipsPlayer
 {
 
     private final static Random rnd = new Random();
@@ -82,7 +82,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
         returnCoordinates();
         if (hit == true)
         {
-            killWounded();
+           // killWounded();
         } else
         {
 
