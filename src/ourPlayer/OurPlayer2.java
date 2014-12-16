@@ -16,7 +16,7 @@ import java.util.Random;
  *
  * @author Jeanette
  */
-public class OurPlayer implements battleship.interfaces.BattleshipsPlayer
+public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
 {
 
     private final static Random rnd = new Random();
@@ -94,15 +94,6 @@ public class OurPlayer implements battleship.interfaces.BattleshipsPlayer
         }
         return shoot;
     }
-//        Position shot = new Position(corX, corY);
-//        
-//        if (corX == 0 && corY == 0)
-//        {
-//            return shot;
-//        }
-//
-//        return shot;
-//    }
 
     @Override
     public void hitFeedBack(boolean hit, Fleet enemyShips)
