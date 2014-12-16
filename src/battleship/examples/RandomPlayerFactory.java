@@ -8,6 +8,7 @@ package battleship.examples;
 
 import battleship.interfaces.BattleshipsPlayer;
 import ourPlayer.OurPlayer;
+import ourPlayer2.OurPlayer2;
 import tournament.player.PlayerFactory;
 
 /**
@@ -28,7 +29,7 @@ public class RandomPlayerFactory implements PlayerFactory<BattleshipsPlayer>
     @Override
     public BattleshipsPlayer getNewInstance()
     {
-        return new OurPlayer();
+        return new OurPlayer2();
     }
 
     @Override
