@@ -25,7 +25,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     private int nextX;
     private int nextY;
     private int corX = 0;
-    private int corY = 0;
+    private int corY = -2;
     private int th = 0;
     private int ing = 0;
     ArrayList<Position> coordinates = new ArrayList<>();
@@ -86,7 +86,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
         Position hitShot = null;
         if (hit == true)
         {
-            killShot1.clear();
+           
             killWounded(corX, corY);
             for (Position i : killShot1)
             {
@@ -98,26 +98,29 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
                     }
                 }
                 hit = false;
+                System.out.println("skud" + hitShot.toString());
                 return hitShot;
             }
         } else
         {
-            if (corY >= sizeY) // her lægger vi en til x for at skifte række
+            if (corY >= sizeY)
             {
-
-                ++corX;
-                ++corY;
                 if (corY >= 2)
                 {
                     corY = 0;
+
                 }
                 if (corX >= sizeX)
                 {
                     corX = 0;
                 }
+                corX++;
+                Position shot = new Position(corX, corY);
+                return shot;
             }
             corY = corY + 2;
             Position shot = new Position(corX, corY);
+            System.out.println("else skud" + shot.toString());
             return shot;
         }
         return null;
@@ -131,12 +134,13 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
 
     public ArrayList<Position> killWounded(int corX, int corY)
     {
+        killShot1.clear();
         int tempX = corX;
         int tempY = corY;
         killShot1.add(new Position(tempX - 1, tempY));
-        killShot1.add(new Position(tempX + 2, tempY));
-        killShot1.add(new Position(tempX - 1, tempY - 1));
-        killShot1.add(new Position(tempX, tempY + 2));
+        killShot1.add(new Position(tempX + 1, tempY));
+        killShot1.add(new Position(tempX, tempY - 1));
+        killShot1.add(new Position(tempX, tempY + 1));
 
         return killShot1;
 
