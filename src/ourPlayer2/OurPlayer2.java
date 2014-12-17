@@ -28,6 +28,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     private int corY = -2;
     private int th = 0;
     private int ing = 0;
+    int count = 0;
     ArrayList<Position> coordinates = new ArrayList<>();
     private boolean hit = false;
     private int enemyFleet;
@@ -86,7 +87,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
         Position hitShot = null;
         if (hit == true)
         {
-           
+
             killWounded(corX, corY);
             for (Position i : killShot1)
             {
@@ -103,20 +104,34 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
             }
         } else
         {
-            if (corY >= sizeY)
+            if (corY >= sizeY - 1)
             {
-                if (corY >= 2)
+                if (count == 0)
                 {
                     corY = 0;
-
+                    if (corX >= sizeX)
+                    {
+                        corX = 0;
+                    }
+                    corX++;
+                    Position shot = new Position(corX, corY);
+                    System.out.println("else skud" + shot.toString());
+                    count++;
+                    return shot;
                 }
-                if (corX >= sizeX)
+                if (count == 1)
                 {
-                    corX = 0;
+                    count = 0;
+                    corY = 1;
+                    if (corX >= sizeX)
+                    {
+                        corX = 0;
+                    }
+                    corX++;
+                    Position shot = new Position(corX, corY);
+                    System.out.println("else skud" + shot.toString());
+                    return shot;
                 }
-                corX++;
-                Position shot = new Position(corX, corY);
-                return shot;
             }
             corY = corY + 2;
             Position shot = new Position(corX, corY);
