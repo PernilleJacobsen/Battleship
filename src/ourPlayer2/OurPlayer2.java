@@ -5,8 +5,6 @@
  */
 package ourPlayer2;
 
-package ourPlayer2;
-
 import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
@@ -79,12 +77,11 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    int i = 0;
 
     @Override
     public Position getFireCoordinates(Fleet enemyShips)
     {
-        Position hitShot = null;
+        Position hitShot;
         if (hit == true)
         {
             killShot1 = killWounded(corX, corY);
@@ -95,10 +92,9 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
             {
                 hitShot = killShot1.get(0);
                 killShot1.remove(0);
-
+                System.out.println("skud" + hitShot.toString());
+                return hitShot;
             }
-            System.out.println("skud" + hitShot.toString());
-            return hitShot;
 
         } else
         {
@@ -118,6 +114,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
             System.out.println("else skud" + shot.toString());
             return shot;
         }
+        return null;
     }
 
     public ArrayList<Position> getCoordinates()
