@@ -96,10 +96,13 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
                     {
                         hitShot = killShot1.get(j);
                     }
+                    hit = false;
+                    System.out.println("skud" + hitShot.toString());
+                    return hitShot;
                 }
-                hit = false;
-                System.out.println("skud" + hitShot.toString());
-                return hitShot;
+//                hit = false;
+//                System.out.println("skud" + hitShot.toString());
+//                return hitShot;
             }
         } else
         {
