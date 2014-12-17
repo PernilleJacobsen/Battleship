@@ -16,7 +16,8 @@ import java.util.Random;
  *
  * @author Jeanette
  */
-public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer {
+public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
+{
 
     private final static Random rnd = new Random();
     private int sizeX;
@@ -34,30 +35,36 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer {
     ArrayList<Position> killShot1 = new ArrayList<>();
 
     @Override
-    public void startMatch(int rounds) {
+    public void startMatch(int rounds)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void startRound(int round) {
+    public void startRound(int round)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void placeShips(Fleet fleet, Board board) {
+    public void placeShips(Fleet fleet, Board board)
+    {
         nextX = 0;
         nextY = 0;
         sizeX = board.sizeX();
         sizeY = board.sizeY();
-        for (int i = 0; i < fleet.getNumberOfShips(); ++i) {
+        for (int i = 0; i < fleet.getNumberOfShips(); ++i)
+        {
             Ship s = fleet.getShip(i);
             boolean vertical = rnd.nextBoolean();
             Position pos;
-            if (vertical) {
+            if (vertical)
+            {
                 int x = rnd.nextInt(sizeX);
                 int y = rnd.nextInt(sizeY - (s.size() - 1));
                 pos = new Position(x, y);
-            } else {
+            } else
+            {
                 int x = rnd.nextInt(sizeX - (s.size() - 1));
                 int y = rnd.nextInt(sizeY);
                 pos = new Position(x, y);
@@ -67,65 +74,63 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer {
     }
 
     @Override
-    public void incoming(Position pos) {
+    public void incoming(Position pos)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     int i = 0;
 
     @Override
-    public Position getFireCoordinates(Fleet enemyShips) {
-        Position shot = new Position(corX, corY);
+    public Position getFireCoordinates(Fleet enemyShips)
+    {
         Position hitShot = null;
-        if (hit == true) {
+        if (hit == true)
+        {
             killShot1.clear();
             killWounded(corX, corY);
-            for (Position i : killShot1) {
-                if (enemyFleet == enemyFleet2) {
-                    for (int j = 0; j < killShot1.size(); ++j) {
+            for (Position i : killShot1)
+            {
+                if (enemyFleet == enemyFleet2)
+                {
+                    for (int j = 0; j < killShot1.size(); ++j)
+                    {
                         hitShot = killShot1.get(j);
                     }
                 }
+                hit = false;
                 return hitShot;
             }
-        } else {
-            if (th > 0 && ing > 0) {
-                if (corY >= sizeY) // her lægger vi en til x for at skifte række
+        } else
+        {
+            if (corY >= sizeY) // her lægger vi en til x for at skifte række
+            {
+
+                ++corX;
+                ++corY;
+                if (corY >= 2)
                 {
-
-                    ++corX;
-                    ++corY;
-                    if (corY >= 2) {
-                        corY = 0;
-                    }
-                    if (corX >= 2)
-                    {
-                        corX = 0;
-                    }
-                    if (corX >= sizeX)
-                    {
-                        corX = 0;
-                    }
+                    corY = 0;
                 }
-                corY = corY + 2;
-                shot = new Position(corX, corY);
-                coordinates.add(shot);
-                return shot;
+                if (corX >= sizeX)
+                {
+                    corX = 0;
+                }
             }
-
-            th = th + 1;
-            ing = ing + 1;
+            corY = corY + 2;
+            Position shot = new Position(corX, corY);
             return shot;
         }
-
         return null;
     }
 
-    public ArrayList<Position> getCoordinates() {
+    public ArrayList<Position> getCoordinates()
+    {
         System.out.println(coordinates.toString());
         return coordinates;
     }
 
-    public ArrayList<Position> killWounded(int corX, int corY) {
+    public ArrayList<Position> killWounded(int corX, int corY)
+    {
         int tempX = corX;
         int tempY = corY;
         killShot1.add(new Position(tempX - 1, tempY));
@@ -138,25 +143,30 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer {
     }
 
     @Override
-    public void hitFeedBack(boolean hit, Fleet enemyShips) {
+    public void hitFeedBack(boolean hit, Fleet enemyShips)
+    {
 
-        if (hit && !this.hit) {
+        if (hit && !this.hit)
+        {
             enemyFleet = enemyShips.getNumberOfShips();
             enemyFleet2 = enemyFleet;
             this.hit = hit;
         }
-        if (hit && this.hit) {
+        if (hit && this.hit)
+        {
             enemyFleet2 = enemyShips.getNumberOfShips();
         }
     }
 
     @Override
-    public void endRound(int round, int points, int enemyPoints) {
+    public void endRound(int round, int points, int enemyPoints)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void endMatch(int won, int lost, int draw) {
+    public void endMatch(int won, int lost, int draw)
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
