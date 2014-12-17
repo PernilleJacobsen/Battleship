@@ -5,6 +5,8 @@
  */
 package ourPlayer2;
 
+package ourPlayer2;
+
 import battleship.interfaces.Board;
 import battleship.interfaces.Fleet;
 import battleship.interfaces.Position;
@@ -85,33 +87,28 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
         Position hitShot = null;
         if (hit == true)
         {
-            killWounded(corX, corY);
-            for (Position i : killShot1)
+            killShot1 = killWounded(corX, corY);
+        }
+        if (killShot1.size() > 0)
+        {
+            if (enemyFleet == enemyFleet2)
             {
-                if (enemyFleet == enemyFleet2)
-                {
-                    for (int j = 0; j < killShot1.size(); ++j)
-                    {
-                        hitShot = killShot1.get(j);
-                    }
-                    hit = false;
-                    System.out.println("skud" + hitShot.toString());
-                    return hitShot;
-                }
-//                hit = false;
-//                System.out.println("skud" + hitShot.toString());
-//                return hitShot;
+                hitShot = killShot1.get(0);
+                killShot1.remove(0);
+
             }
+            System.out.println("skud" + hitShot.toString());
+            return hitShot;
+
         } else
         {
             corY = corY + 2;
             if (corY >= sizeY)
             {
-                if(corY == 10)
+                if (corY == 10)
                 {
                     corY = 1;
-                }
-                else
+                } else
                 {
                     corY = 0;
                 }
@@ -121,7 +118,6 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
             System.out.println("else skud" + shot.toString());
             return shot;
         }
-        return null;
     }
 
     public ArrayList<Position> getCoordinates()
@@ -133,12 +129,10 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     public ArrayList<Position> killWounded(int corX, int corY)
     {
         killShot1.clear();
-        int tempX = corX;
-        int tempY = corY;
-        killShot1.add(new Position(tempX - 1, tempY));
-        killShot1.add(new Position(tempX + 1, tempY));
-        killShot1.add(new Position(tempX, tempY - 1));
-        killShot1.add(new Position(tempX, tempY + 1));
+        killShot1.add(new Position(corX - 1, corY));
+        killShot1.add(new Position(corX + 1, corY));
+        killShot1.add(new Position(corX, corY - 1));
+        killShot1.add(new Position(corX, corY + 1));
 
         return killShot1;
 
@@ -147,7 +141,6 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     @Override
     public void hitFeedBack(boolean hit, Fleet enemyShips)
     {
-
         if (hit && !this.hit)
         {
             enemyFleet = enemyShips.getNumberOfShips();
@@ -158,6 +151,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
         {
             enemyFleet2 = enemyShips.getNumberOfShips();
         }
+        this.hit = hit;
     }
 
     @Override
