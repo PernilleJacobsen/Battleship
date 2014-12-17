@@ -25,10 +25,7 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     private int nextX;
     private int nextY;
     private int corX = 0;
-    private int corY = -2;
-    private int th = 0;
-    private int ing = 0;
-    int count = 0;
+    private int corY = 0;
     ArrayList<Position> coordinates = new ArrayList<>();
     private boolean hit = false;
     private int enemyFleet;
@@ -44,7 +41,8 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
     @Override
     public void startRound(int round)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        corX = 0;
+        corY = 0;
     }
 
     @Override
@@ -106,36 +104,19 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
             }
         } else
         {
-            if (corY >= (sizeY - 1))
+            corY = corY + 2;
+            if (corY >= sizeY)
             {
-                if (count == 1)
+                if(corY == 10)
+                {
+                    corY = 1;
+                }
+                else
                 {
                     corY = 0;
-                    count = 0;
-                    if (corX >= sizeX)
-                    {
-                        corX = 0;
-                    }
-                    corX++;
-                    Position shot = new Position(corX, corY);
-                    System.out.println("else skud" + shot.toString());
-                    return shot;
                 }
-                if (count == 0)
-                {
-                    count++;
-                    corY = 1;
-                    if (corX >= sizeX)
-                    {
-                        corX = 0;
-                    }
-                    corX++;
-                    Position shot = new Position(corX, corY);
-                    System.out.println("else skud" + shot.toString());
-                    return shot;
-                }
+                corX = corX + 1;
             }
-            corY = corY + 2;
             Position shot = new Position(corX, corY);
             System.out.println("else skud" + shot.toString());
             return shot;
