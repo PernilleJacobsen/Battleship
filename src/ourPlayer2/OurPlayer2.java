@@ -87,7 +87,6 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
         Position hitShot = null;
         if (hit == true)
         {
-
             killWounded(corX, corY);
             for (Position i : killShot1)
             {
@@ -104,11 +103,12 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
             }
         } else
         {
-            if (corY >= sizeY - 1)
+            if (corY >= (sizeY - 1))
             {
-                if (count == 0)
+                if (count == 1)
                 {
                     corY = 0;
+                    count = 0;
                     if (corX >= sizeX)
                     {
                         corX = 0;
@@ -116,12 +116,11 @@ public class OurPlayer2 implements battleship.interfaces.BattleshipsPlayer
                     corX++;
                     Position shot = new Position(corX, corY);
                     System.out.println("else skud" + shot.toString());
-                    count++;
                     return shot;
                 }
-                if (count == 1)
+                if (count == 0)
                 {
-                    count = 0;
+                    count++;
                     corY = 1;
                     if (corX >= sizeX)
                     {
